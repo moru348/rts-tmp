@@ -72,13 +72,12 @@ fun main() {
     // OKHttpのクライアントを作成
     val okHttpClient = OkHttpClient()
     // Gsonのクライアントを作成
-    val gson = GsonBuilder().setDateFormat("yyyy/MM/DD HH:mm").create()
+    val gson = GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create()
     val response = okHttpClient.newCall(Request.Builder().url("https://moru348.github.io/rts-tmp/events.json").get().build()).execute()
     val event = gson.fromJson(response.body?.string(),JsonArray::class.java)
         .map { gson.fromJson(it, TemporaryServer.Event::class.java) }
         .sortedBy { it.start }
         .filter { Date().after(it.end) }[0]
+    println("${event.name} ${SimpleDateFormat("yyyy/MM/DD HH:mm").format(event.start)}")
     println((event.start.time-Date().time) / ( 1000 * 60 * 60 * 24 ))
-    println(event.start)
-    println(SimpleDateFormat("yyyy/MM/DD HH:mm").format(Date()))
 }
