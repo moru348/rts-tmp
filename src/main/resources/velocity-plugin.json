@@ -1,0 +1,10 @@
+{
+  "id": "temporaryserver",
+  "name": "Temporary Server",
+  "version": "1.12.1",
+  "authors": [
+    "moru3_48"
+  ],
+  "dependencies": [],
+  "main": "dev.moru3.temporaryserver.TemporaryServer"
+}
